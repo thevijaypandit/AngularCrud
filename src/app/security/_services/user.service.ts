@@ -3,19 +3,19 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../_models/user';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class UserService {
+    constructor(private http: HttpClient) { }
 
-  constructor(private _http: HttpClient) { }
-  getAll() {
-    return this._http.get<User[]>('${config.appUrl}/users')
-  }
-  register(user:User){
-    return this._http.post('${config.apiUrl}/users/register', user);
-  }
-  delete(id:number){
-    return this._http.delete('${config.apiUrl}/users/${id}');
-  }
+    getAll() {
+        return this.http.get<User[]>('${config.apiUrl}/users');
+    }
+
+    register(user: User) {
+        return this.http.post('${config.apiUrl}/users/register', user);
+    }
+
+    delete(id: number) {
+        return this.http.delete('${config.apiUrl}/users/${id}');
+    }
 }
